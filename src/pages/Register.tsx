@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button, Typography, Container } from "@mui/material";
 import axios from "axios";  // Import axios if not already imported
 import { UserRegister } from "../models/User";
-
+import Swal from "sweetalert2";
 const api = "http://192.168.1.78:8222/api/v1/users";  // Define the API endpoint
 
 const Register: React.FC = () => {
@@ -24,8 +24,7 @@ const Register: React.FC = () => {
   };
 
   const handleRegister = async () => {
-    try {
-      console.log("Form Data:", formData);  // Log the form data before sending
+    try {      
       const response = await axios.post(api + "/register", {
         firstname: formData.firstname,
         lastname: formData.lastname,
@@ -33,12 +32,20 @@ const Register: React.FC = () => {
         password: formData.password,
         roleList: formData.roleList
       });
-
-      alert(`Usuario registrado: ${formData.firstname}`);
-      console.log("Register Response:", response.data);
+      Swal.fire({
+        icon: 'success',
+        title: 'Registro exitoso',
+        text: 'El usuario se ha registrado correctamente.',
+      });
+      console.log(response)
     } catch (error) {
       console.error("Register Error:", error);
       setError("Error al registrar usuario");
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'El correo ya se encuentra registrados en el sistema',
+      });
     }
   };
 
