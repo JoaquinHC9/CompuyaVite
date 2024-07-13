@@ -26,8 +26,8 @@ export const SidebarData: SidebarItem[] = [
     link: '/categories',
   },
   {
-    title: 'Customers',
+    title: 'Customer Info',
     icon: <PeopleIcon />,
-    link: '/customers',
+    link: '/customerinfo',
   },
 ];

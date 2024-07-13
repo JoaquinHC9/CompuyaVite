@@ -8,7 +8,7 @@ import { CartItem } from "../models/CartItem";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import { toast } from 'react-toastify';
-
+import API_URL from '../config/config';
 const ProductDetails: React.FC = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
@@ -17,7 +17,7 @@ const ProductDetails: React.FC = () => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await fetch(`http://192.168.1.78:8222/api/v1/products/${productId}`);
+        const response = await fetch(`${API_URL}/products/${productId}`);
         if (response.ok) {
           const data = await response.json();
           setProduct(data);
